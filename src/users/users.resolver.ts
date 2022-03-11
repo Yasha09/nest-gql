@@ -20,4 +20,10 @@ export class UsersResolver {
   async getUser(@Args() getUserArgs: GetUserArgs) {
     return this.userService.getUser(getUserArgs);
   }
+
+  @UseGuards(GqlAuthGuard)
+  @Query(() => [User], { name: 'users' })
+  async getUsers() {
+    return this.userService.getUsers();
+  }
 }

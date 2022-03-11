@@ -21,7 +21,6 @@ export class UsersService {
     });
     return this.toModel(userDocument);
   }
-
   private async validateCreateUserData(createUserData: CreateUserInput) {
     try {
       await this.usersRepository.findOne({ email: createUserData.email });
@@ -31,6 +30,13 @@ export class UsersService {
   async getUser(getUserArgs: GetUserArgs) {
     const userDocument = await this.usersRepository.findOne(getUserArgs);
     return this.toModel(userDocument);
+  }
+
+  async getUsers() {
+    let userArr = [];
+    const usersDocument = await this.usersRepository.find();
+    userArr = usersDocument.map((user) => this.toModel(user));
+    return userArr;
   }
 
   async validateUser(email: string, password: string) {

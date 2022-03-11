@@ -23,4 +23,8 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     }
     return document;
   }
+
+  async find(): Promise<TDocument[]> {
+    return await this.model.find();
+  }
 }
